@@ -8,7 +8,7 @@ app.set('view engine', 'ejs');
 
 
 app.get('/', (req, res) => {
-  res.send('Home page');
+  res.render('login');
 });
 
 
