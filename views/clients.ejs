@@ -1,0 +1,42 @@
+<% include partials/header.ejs %>
+<body>
+  <% include partials/navigation.ejs %>
+
+  <main class="container">
+    <h1>Client Address Book</h1>
+
+    <table class="table table-striped table-bordered">
+        <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th>Address</th>
+            <th>Company</th>
+            <th>Notes</th>
+            <th>Edit</th>
+        </tr>
+        <tr>
+            <td>John Doe</td>
+            <td>john@example.com</td>
+            <td>(123)456-7890</td>
+            <td>123 Address Circle</td>
+            <td>My Company</td>
+            <td>Sample Note</td>
+            <td>
+              <a href="/edit" type="button" class="btn btn-primary btn-sm">
+                <span class="glyphicon glyphicon-edit"></span>
+              </a>
+            </td>
+          </tr>
+        <tr>
+          <td colspan="7">
+            <div class="text-center">
+              <a href="/add" type="button" class="btn btn-sm btn-success">
+                <span class="glyphicon glyphicon-plus"></span> Add Client
+              </a>
+            </div>
+          </td>
+        </tr>
+    </table>
+  </main>
+<% include partials/footer.ejs %>
