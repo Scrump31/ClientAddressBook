@@ -5,14 +5,17 @@ const Client = mongoose.model('Client', {
     type: String,
     required: true,
     trim: true,
+    minlength: 3,
   },
   email: {
     type: String,
     required: true,
     trim: true,
+    minlength: 1,
   },
   phone: {
     type: Number,
+    minlength: 7,
   },
   address: {
     type: String,

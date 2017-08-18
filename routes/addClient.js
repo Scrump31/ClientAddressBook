@@ -10,13 +10,13 @@ router.get('/add', (req, res) => {
 
 router.post('/add', (req, res) => {
   const body = _.pick(req.body, [
-    'name', 'email', 'address', 'company', 'notes',
+    'name', 'email', 'phone', 'address', 'company', 'notes',
   ]);
   const client = new Client(body);
 
   client.save().then(() => {
-    res.send(client);
-  }).catch(e => res.status(400).send(e));
+    res.redirect('/clients');
+  }).catch(e => res.status(400).send(e.message));
 });
 
 module.exports = router;

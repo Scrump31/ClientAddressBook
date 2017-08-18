@@ -15,19 +15,21 @@
             <th>Notes</th>
             <th>Edit</th>
         </tr>
-        <tr>
-            <td>John Doe</td>
-            <td>john@example.com</td>
-            <td>(123)456-7890</td>
-            <td>123 Address Circle</td>
-            <td>My Company</td>
-            <td>Sample Note</td>
-            <td>
-              <a href="/edit" type="button" class="btn btn-primary btn-sm">
-                <span class="glyphicon glyphicon-edit"></span>
-              </a>
-            </td>
-        </tr>
+        <% listOfClients.map(client => { %>
+          <tr>
+              <td><%= client.name %></td>
+              <td><%= client.email %></td>
+              <td><%= client.phone %></td>
+              <td><%= client.address %></td>
+              <td><%= client.company %></td>
+              <td><%= client.notes %></td>
+              <td>
+                <a href="/edit" type="button" class="btn btn-primary btn-sm">
+                  <span class="glyphicon glyphicon-edit"></span>
+                </a>
+              </td>
+          </tr>
+        <% }); %>
         <tr>
           <td colspan="7">
             <div class="text-center">
