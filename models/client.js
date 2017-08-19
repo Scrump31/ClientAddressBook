@@ -25,6 +25,7 @@ const Client = mongoose.model('Client', {
   },
   notes: {
     type: String,
+    maxlength: 255,
   },
 });
 

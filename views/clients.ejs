@@ -14,6 +14,7 @@
             <th>Company</th>
             <th>Notes</th>
             <th>Edit</th>
+            <th>Delete</th>
         </tr>
         <% listOfClients.map(client => { %>
           <tr>
@@ -24,14 +25,19 @@
               <td><%= client.company %></td>
               <td><%= client.notes %></td>
               <td>
-                <a href="/edit" type="button" class="btn btn-primary btn-sm">
+                <a href="/edit/<%= client.id %>" type="button" class="btn btn-primary btn-sm">
                   <span class="glyphicon glyphicon-edit"></span>
                 </a>
+              </td>
+              <td>
+                <form class="" action="/delete/<%= client.id %>" method="post">
+                  <button type="submit" class="btn btn-danger btn-sm" name="delete"><span class="glyphicon glyphicon-trash"></span></button>
+                </form>
               </td>
           </tr>
         <% }); %>
         <tr>
-          <td colspan="7">
+          <td colspan="8">
             <div class="text-center">
               <a href="/add" type="button" class="btn btn-sm btn-success">
                 <span class="glyphicon glyphicon-plus"></span> Add Client

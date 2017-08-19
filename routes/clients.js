@@ -11,4 +11,14 @@ router.get('/clients', (req, res) => {
   }, e => res.status(400).send(e));
 });
 
+router.post('/delete/:id', (req, res) => {
+  const id = req.params.id;
+
+  Client.findByIdAndRemove(id).then((client) => {
+    // Check if ID exists in collection
+    if (!client) return res.status(404).send();
+    return res.redirect('/clients');
+  }).catch(() => res.status(400).send());
+});
+
 module.exports = router;
