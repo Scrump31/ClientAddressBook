@@ -18,3 +18,5 @@ app.set('view engine', 'ejs');
 
 const port = process.env.PORT;
 app.listen(port, () => console.log(`Listening on port ${port}`));
+
+module.exports = app;
