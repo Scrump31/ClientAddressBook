@@ -30,6 +30,13 @@ before('Clear db before running all tests', async () => {
   await Client.insertMany(mockClients);
 });
 
+describe('/ "login route":', () => {
+  it('sucessfully renders', async () => {
+    const login = await request(app).get('/');
+    expect(login.status).to.equal(200);
+  });
+});
+
 describe('/clients route:', () => {
   describe('GET /clients', () => {
     it('should render clients template with a list of clients', async () => {
@@ -42,6 +49,33 @@ describe('/clients route:', () => {
     it('should return a list of 2 clients', async () => {
       const getClients = await Client.find();
       expect(getClients).to.have.lengthOf(2);
+    });
+  });
+});
+
+describe('/add route:', () => {
+  describe('GET /add', () => {
+    it('should render add-client template', async () => {
+      const addClient = await request(app).get('/add');
+      expect(addClient.status).to.equal(200);
+    });
+  });
+  describe('POST /add', () => {
+    it('should create a new client', async () => {
+      const client = { _id: new ObjectID(),
+        name: 'test client 1',
+        email: 'test1@mail.com',
+        phone: 1234567,
+        address: 'test1 address',
+        company: 'test1 company',
+        notes: 'test1 notes',
+      };
+      const createClient = await request(app)
+      .post('/add')
+      .send(client);
+      expect(createClient.status).to.equal(302);
+      const getClients = await Client.find();
+      expect(getClients).to.have.lengthOf(3);
     });
   });
 });
