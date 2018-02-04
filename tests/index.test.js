@@ -63,7 +63,7 @@ describe('/add route:', () => {
     });
   });
   describe('POST /add', () => {
-    it('should create a new client', async () => {
+    it('should create a new 3rd client', async () => {
       const client = {
         _id: new ObjectID(),
         name: 'test client 3',
@@ -96,11 +96,22 @@ describe('/edit/:id route:', () => {
     });
   });
   describe('POST /edit/"someID', () => {
-    it('should update a client doc', async () => {
+    it('should update the 2nd mock Client doc', async () => {
       const updateClient = await request(app)
         .post(`/edit/${mockClients[1]._id.toHexString()}`)
         .send({ name: 'updated name!' });
       expect(updateClient.status).to.equal(302);
     });
+  });
+});
+
+describe('/delete/:id route:', () => {
+  it('should remove the 1st mock Client doc with only 2 remaining', async () => {
+    const deleteClient = await request(app).post(`/delete/${mockClients[0]._id.toHexString()}`);
+    expect(deleteClient.status).to.equal(302);
+
+    // Check that Clients is updated from 3 to 2 total clients
+    const getClients = await Client.find();
+    expect(getClients).to.have.lengthOf(2);
   });
 });
