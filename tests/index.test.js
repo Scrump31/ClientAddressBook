@@ -7,7 +7,8 @@ const app = require('../index');
 const { Client } = require('../models/client');
 
 const mockClients = [
-  { _id: new ObjectID(),
+  {
+    _id: new ObjectID(),
     name: 'test client 1',
     email: 'test1@mail.com',
     phone: 1234567,
@@ -15,7 +16,8 @@ const mockClients = [
     company: 'test1 company',
     notes: 'test1 notes',
   },
-  { _id: new ObjectID(),
+  {
+    _id: new ObjectID(),
     name: 'test client 2',
     email: 'test2@mail.com',
     phone: 1122334,
@@ -62,7 +64,8 @@ describe('/add route:', () => {
   });
   describe('POST /add', () => {
     it('should create a new client', async () => {
-      const client = { _id: new ObjectID(),
+      const client = {
+        _id: new ObjectID(),
         name: 'test client 3',
         email: 'test3@mail.com',
         phone: 3333333,
@@ -71,8 +74,8 @@ describe('/add route:', () => {
         notes: 'test3 notes',
       };
       const createClient = await request(app)
-      .post('/add')
-      .send(client);
+        .post('/add')
+        .send(client);
       expect(createClient.status).to.equal(302);
       const getClients = await Client.find();
       expect(getClients).to.have.lengthOf(3);
@@ -80,3 +83,16 @@ describe('/add route:', () => {
   });
 });
 
+describe('/edit/:id route:', () => {
+  describe('GET /edit/"someID"', () => {
+    it('should render edit-client template for a specific ID ', async () => {
+      const firstMockClient = await request(app).get(`/edit/${mockClients[0]._id.toHexString()}`);
+      expect(firstMockClient.status).to.equal(200);
+    });
+    it('should return 404 when Client doc not found', async () => {
+      const fakeID = new ObjectID().toHexString();
+      const docNotFound = await request(app).get(`/edit/${fakeID}`);
+      expect(docNotFound.status).to.equal(404);
+    });
+  });
+});

@@ -45,7 +45,7 @@ exports.getEditClient = async function getEditClient(req, res) {
 
     res.render('edit-client', { title: 'Edit Client', client });
   } catch (error) {
-    res.status(400).send(error.message);
+    res.status(404).send(error.message);
   }
 };
 
