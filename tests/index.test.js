@@ -115,3 +115,10 @@ describe('/delete/:id route:', () => {
     expect(getClients).to.have.lengthOf(2);
   });
 });
+
+describe('/logout route:', () => {
+  it('sucessfully renders', async () => {
+    const logout = await request(app).get('/logout');
+    expect(logout.status).to.equal(200);
+  });
+});
