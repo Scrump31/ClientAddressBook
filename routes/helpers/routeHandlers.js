@@ -57,7 +57,7 @@ exports.postEditClient = async function postEditClient(req, res) {
     if (!client) res.status(404).send();
     res.redirect('/clients');
   } catch (error) {
-    res.status(400).send();
+    res.status(404).send();
   }
 };
 
