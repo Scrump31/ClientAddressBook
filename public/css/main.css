@@ -3,3 +3,8 @@
 main {
   margin-top: 4rem;
 }
+.nav .img-circle {
+  width: 45px;
+  margin-right: 5px;
+  margin-top: 2px;
+}

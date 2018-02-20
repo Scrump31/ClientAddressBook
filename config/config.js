@@ -1,3 +1,5 @@
+const { mongodb } = require('./keys');
+
 const env = process.env.NODE_ENV || 'development';
 if (env === 'development') {
   process.env.PORT = 3000;
@@ -5,4 +7,7 @@ if (env === 'development') {
 } else if (env === 'test') {
   process.env.PORT = 3001;
   process.env.MONGODB_URI = 'mongodb://localhost:27017/TestClientAddressBook';
+} else if (env === 'production') {
+  process.env.PORT = 3002;
+  process.env.MONGODB_URI = mongodb.dbURI;
 }

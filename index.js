@@ -2,9 +2,13 @@
 const express = require('express');
 const router = require('./routes/index');
 const bodyParser = require('body-parser');
+const { session } = require('./config/keys');
+const cookieSession = require('cookie-session');
+const passport = require('passport');
 
 require('./config/config');
 require('./db/mongoose');
+require('./config/services');
 
 const app = express();
 
@@ -12,6 +16,18 @@ const app = express();
 app.use(express.static(`${__dirname}/public`));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+
+// Encrypts cookies
+app.use(cookieSession({
+  name: 'session',
+  keys: [session.cookieKey],
+  maxAge: 24 * 60 * 60 * 1000, // 24 hours
+}));
+
+// initalize passport
+app.use(passport.initialize());
+app.use(passport.session());
+
 app.use('/', router);
 
 app.set('view engine', 'ejs');
