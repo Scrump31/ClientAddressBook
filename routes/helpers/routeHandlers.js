@@ -22,7 +22,8 @@ exports.authGoogleRedirect = function authGoogleRedirect(req, res) {
 
 exports.getClients = async function getClients(req, res) {
   try {
-    const clients = await Client.find();
+    const { _id } = req.user;
+    const clients = await Client.find({ _creator: _id });
     res.render('clients', { title: 'Clients', clients, user: req.user });
   } catch (error) {
     res.send(error);
@@ -39,8 +40,17 @@ exports.addNewClient = function addNewClient(req, res) {
 
 exports.postNewClient = async function postNewClient(req, res) {
   try {
-    const body = _.pick(req.body, ['name', 'email', 'phone', 'address', 'company', 'notes']);
-    const client = new Client(body);
+    const { _id } = req.user;
+    const { name, email, phone, address, company } = req.body;
+    const client = new Client({
+      name,
+      email,
+      phone,
+      address,
+      company,
+      _creator: _id,
+    });
+
     await client.save();
     res.redirect('/clients');
   } catch (error) {

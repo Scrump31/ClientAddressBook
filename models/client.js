@@ -27,6 +27,10 @@ const Client = mongoose.model('Client', {
     type: String,
     maxlength: 255,
   },
+  _creator: {
+    type: mongoose.Schema.Types.ObjectId,
+    required: true,
+  },
 });
 
 module.exports = { Client };
