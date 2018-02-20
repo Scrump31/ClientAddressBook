@@ -87,7 +87,7 @@ exports.deleteClient = async function deleteClient(req, res) {
   try {
     const id = req.params.id;
     const client = await Client.findByIdAndRemove(id);
-        // Check if ID exists in collection
+    // Check if ID exists in collection
     if (!client) res.status(404).send();
     res.redirect('/clients');
   } catch (error) {
