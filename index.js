@@ -2,7 +2,6 @@
 const express = require('express');
 const router = require('./routes/index');
 const bodyParser = require('body-parser');
-const { session } = require('./config/keys');
 const cookieSession = require('cookie-session');
 const passport = require('passport');
 
@@ -20,7 +19,7 @@ app.use(bodyParser.json());
 // Encrypts cookies
 app.use(cookieSession({
   name: 'session',
-  keys: [session.cookieKey],
+  keys: [process.env.cookieKey],
   maxAge: 24 * 60 * 60 * 1000, // 24 hours
 }));
 

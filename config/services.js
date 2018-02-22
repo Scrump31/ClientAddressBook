@@ -3,15 +3,15 @@
 
 const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth20');
-const { google } = require('./keys');
+// const { google } = require('./keys');
 const User = require('../models/user');
 
 passport.use(
   new GoogleStrategy(
     {
       callbackURL: '/auth/google/redirect',
-      clientID: google.clientID,
-      clientSecret: google.clientSecret,
+      clientID: process.env.clientID,
+      clientSecret: process.env.clientSecret,
     },
     (accessToken, refreshToken, profile, done) => {
       // passport callback function invoked when profile info received from Google
