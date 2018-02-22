@@ -1,3 +1,4 @@
+/* eslint no-underscore-dangle: "off" */
 const _ = require('lodash');
 const { Client } = require('../../models/client');
 const passport = require('passport');
@@ -41,13 +42,14 @@ exports.addNewClient = function addNewClient(req, res) {
 exports.postNewClient = async function postNewClient(req, res) {
   try {
     const { _id } = req.user;
-    const { name, email, phone, address, company } = req.body;
+    const { name, email, phone, address, company, notes } = req.body;
     const client = new Client({
       name,
       email,
       phone,
       address,
       company,
+      notes,
       _creator: _id,
     });
 
@@ -61,7 +63,8 @@ exports.postNewClient = async function postNewClient(req, res) {
 exports.getEditClient = async function getEditClient(req, res) {
   try {
     const id = req.params.id;
-    const client = await Client.findById(id);
+    const creatorID = req.user._id;
+    const client = await Client.findOne({ _id: id, _creator: creatorID });
     // Check if ID exists in collection
     if (!client) res.status(404).send();
 
@@ -74,8 +77,13 @@ exports.getEditClient = async function getEditClient(req, res) {
 exports.postEditClient = async function postEditClient(req, res) {
   try {
     const id = req.params.id;
+    const creatorID = req.user._id;
     const body = _.pick(req.body, ['name', 'email', 'phone', 'address', 'company', 'notes']);
-    const client = await Client.findByIdAndUpdate(id, { $set: body }, { new: true });
+    const client = await Client.findOneAndUpdate(
+      { _id: id, _creator: creatorID },
+      { $set: body },
+      { new: true },
+    );
     if (!client) res.status(404).send();
     res.redirect('/clients');
   } catch (error) {
@@ -86,7 +94,8 @@ exports.postEditClient = async function postEditClient(req, res) {
 exports.deleteClient = async function deleteClient(req, res) {
   try {
     const id = req.params.id;
-    const client = await Client.findByIdAndRemove(id);
+    const creatorID = req.user._id;
+    const client = await Client.findOneAndRemove({ _id: id, _creator: creatorID });
     // Check if ID exists in collection
     if (!client) res.status(404).send();
     res.redirect('/clients');
