@@ -30,7 +30,7 @@ passport.use(
           })
             .save()
             .then((newUser) => {
-              console.log(`new user created ${newUser}`);
+              // console.log(`new user created ${newUser}`);
               done(null, newUser);
             });
         }

@@ -7,7 +7,6 @@ if (env === 'development') {
 } else if (env === 'test') {
   process.env.PORT = 3001;
   process.env.MONGODB_URI = 'mongodb://localhost:27017/TestClientAddressBook';
-} else if (env === 'production') {
-  process.env.PORT = 3002;
+} else {
   process.env.MONGODB_URI = mongodb.dbURI;
 }

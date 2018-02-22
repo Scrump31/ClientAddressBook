@@ -4,9 +4,13 @@
   "description": "An app to manage contacts",
   "main": "index.js",
   "scripts": {
+    "start": "node index.js",
     "test": "export NODE_ENV=test || SET \"NODE_ENV=test\" && nodemon --exec mocha --reporter list **/*.test.js",
     "dev": "nodemon index.js -e js,ejs",
     "prod": "export NODE_ENV=production || SET \"NODE_ENV=production\" && nodemon index.js -e js,ejs"
+  },
+  "engines": {
+    "node": "8.9.4"
   },
   "keywords": [
     "javascript",
