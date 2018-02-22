@@ -27,12 +27,12 @@ describe('Secured routes', () => {
   it('should deny un-authenticated access to /edit/:id and redirect to /', async () => {
     const getEdit = await request(app).get('/edit/:9827597947');
     expect(getEdit.status).to.equal(302);
-    const postEdit = await request(app).post('/edit/:9827597947');
+    const postEdit = await request(app).post('/edit/9827597947');
     expect(postEdit.status).to.equal(302);
   });
 
   it('should deny un-authenticated access to /delete/:id and redirect to /', async () => {
-    const deleteClient = await request(app).post('/delete/:39847598347');
+    const deleteClient = await request(app).post('/delete/39847598347');
     expect(deleteClient.status).to.equal(302);
   });
 
