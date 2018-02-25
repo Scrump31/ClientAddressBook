@@ -1,5 +1,3 @@
-/* eslint no-underscore-dangle: "off" */
-
 const { ObjectID } = require('../../node_modules/mongodb');
 
 const users = [

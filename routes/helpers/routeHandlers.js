@@ -1,4 +1,3 @@
-/* eslint no-underscore-dangle: "off" */
 const _ = require('lodash');
 const { Client } = require('../../models/client');
 const passport = require('passport');

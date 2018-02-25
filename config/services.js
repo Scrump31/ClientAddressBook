@@ -1,9 +1,7 @@
-/* eslint no-underscore-dangle: "off" */
 /* eslint no-console: "off" */
 
 const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth20');
-// const { google } = require('./keys');
 const User = require('../models/user');
 
 passport.use(

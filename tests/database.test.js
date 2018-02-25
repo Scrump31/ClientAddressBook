@@ -1,4 +1,3 @@
-/* eslint no-underscore-dangle: "off" */
 const { expect } = require('chai');
 const { Client } = require('../models/client');
 const User = require('../models/user');

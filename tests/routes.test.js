@@ -1,5 +1,3 @@
-/* eslint no-underscore-dangle: "off" */
-
 const request = require('supertest');
 const { expect } = require('chai');
 const app = require('../index');
